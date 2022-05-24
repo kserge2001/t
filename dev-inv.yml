@@ -1,0 +1,19 @@
+db1 ansible_host=192.168.56.96 
+web1 ansible_host=192.168.56.95 
+
+[webserver]
+192.168.56.95
+
+
+[dbserver]
+192.168.56.96
+
+[atlanta:children]
+webserver
+dbserver
+
+#[webserver:vars]
+#ansible_ssh_user=serge
+
+#[prometheus]
+#app01 ansible_host=192.168.56.240

@@ -1,0 +1,43 @@
+---
+- hosts: atlanta
+  remote_user: vagrant
+  become: yes
+
+
+  tasks:
+    - name:
+      debug:
+        msg:  "the OS is {{ ansible_os_family}}"
+    - name: Create user 
+      user:
+        name: u5bt
+        comment: "Monte Carlos"
+      when:
+        - ansible_distribution == 'Ubuntu'
+    - name: Create file
+      file:
+         dest: /tmp/serge.txt
+         state: touch
+      register: result
+    - name: get result info
+      debug:
+       var: result.diff.after.path
+    - name: Create file
+      file:
+         dest: /tmp/ansible_dir
+         state: directory
+         mode: '0755'
+    - name: Install apache
+      yum:
+        name: "{{ packages_name }}"
+      vars:
+        packages_name:
+          - httpd
+          - httpd-tools
+          - wget
+          - finger
+    - name: syart apache daemon
+      service:
+         name: httpd
+         state: started
+         enabled: yes  
