@@ -10,7 +10,7 @@ pipeline {
     }
   post{
     success {
-     emailext attachLog: true, body: '', subject: 'failed', to: 'serge.kamgang@utrains.org' 
+     emailext attachLog: true, body: '', subject: 'failed', to: 'unixclassd1@gmail.com' 
     }
   }
 }
